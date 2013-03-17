@@ -4,8 +4,6 @@
 
 
   <div class="content">
-
-  <div class="content">
     <h1>Welcome!</h1>
     
    <p>Home Page Text Goes Here</p>
