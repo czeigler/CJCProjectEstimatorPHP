@@ -71,14 +71,11 @@
     }
     
 ?>
-
-
-<h1>Sign-Up!</h1>
-    
-   <p>Sign up for the CJC Project Estimator - It's free and we won't spam you.</p>
+  
+   <p><br>Sign up for the CJC Project Estimator - It's free and we won't spam you.</p>
    
-   <div class="signup">
-    <h4>Enter your desired account information below.</h4>
+   <div class="fieldset">
+    <h4 class="legend">Sign-up</h4>
     <form method="post" action="signup.php">
 
         
@@ -90,7 +87,7 @@
     }
     ?>
 
-        
+       
         
     <table class="table">
       <tr >
@@ -123,7 +120,7 @@
       </tr>
     </table>
     </form>
-    <p>&nbsp;</p>    
+     
     <span class='required'>* Required Fields</span>
     <p>&nbsp;</p>
    </div>   
