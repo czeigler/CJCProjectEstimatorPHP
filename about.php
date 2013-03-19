@@ -4,7 +4,7 @@
 
 
   <div class="content">
-    <h2>About the CJC Project Estimator</h2>
+    <h3>About the CJC Project Estimator</h3>
     
      <p>This CJC project is a variable costs project estimation tool.</p>
 <p>There are many small businesses and craftsmen who need to estimate materials and labor for custom projects. These projects most often have different materials, costs, hours, and labor rates. For example, a carpenter, tailor, or landscaper may all need to bid projects based on an estimate of labor and materials. The proposed project would address this need by building a project estimation tool that allowed for variable material, labor, and costs. In addition, the project would keep track of multiple projects where the user could record actual costs and then look at an aggregated data report to see resources, and labor project estimation tool for this target audience.</p> 
