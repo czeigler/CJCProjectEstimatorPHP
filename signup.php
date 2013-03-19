@@ -72,7 +72,8 @@
     
 ?>
   
-   <p><br>Sign up for the CJC Project Estimator - It's free and we won't spam you.</p>
+   <h3><br>Sign up for the CJC Project Estimator</h3>
+   <p>It's <strong>free</strong> and we won't spam you.</p>
    
    <div class="fieldset">
     <h4 class="legend">Sign-up</h4>
