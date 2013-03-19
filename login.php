@@ -54,9 +54,9 @@ if (!empty($_POST)) {
 ?>
 
 
-<h1>Login</h1>
 
-<div class="signup">
+<div class="fieldset">
+    <div class="legend">Login</div>
     <h4>Enter your user name and password below to log in.</h4>
     <form method="post" action="login.php">
 
