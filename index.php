@@ -4,7 +4,7 @@
 
 
   <div class="content">
-    <h2>Welcome to the CJC Project Estimator</h2>
+    <h2><br>Welcome to the CJC Project Estimator</h2>
     <p><div class="image"><image src="images/worker.jpg" width="311" height="269" alt="Project Worker"/></div><p> 
    <p>The CJC Project Estimator allows people to enter the materials and labor estimated for a project and product a project estimate.</p>
    <p>The estimator tool was developed by Christopher Allen, Jeremy Eichelberger, and Christopher Zeigler for CIS 665 at Colorado State University.</p>
