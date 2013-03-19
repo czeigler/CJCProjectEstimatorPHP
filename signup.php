@@ -116,7 +116,7 @@
       </tr>
       <tr>
         <td class="firstcoll">
-        <td class="submitcoll"><input type="submit" name="Submit2" id="Submit2" value="Submit"></td>
+        <td class="submitcoll"><input class="input" type="submit" name="Submit2" id="Submit2" value="Submit"></td>
       </tr>
     </table>
     </form>
