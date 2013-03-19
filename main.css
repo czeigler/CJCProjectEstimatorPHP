@@ -209,7 +209,14 @@ a:hover, a:active, a:focus {
 .input[type=submit] {
     color: #444444;
     font-size: 20px;
+    border-radius: 5px;
     padding-bottom: 3px;
     border: 1px solid #b2b2b2;
     margin: 25px;
+}
+.image
+{ float: right;
+  clear: both;
+  margin-right: 15px;
+  padding: 2px;
 }
