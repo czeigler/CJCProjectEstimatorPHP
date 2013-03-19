@@ -27,14 +27,17 @@
 </form>
 <hr/>
 
-<h3>Current Materials List</h3>
+<h3>Manage Labor</h3>
 <form method="post" action="addLabor.php">
+    Description: <input type="text" name="description" value="<?php echo($description);?>"/><br/>
     Labor Hours: <input type="text" name="hours" value="<?php echo($hours);?>"/><br/>
     Labor Rate: <input type="text" name="rate" value="<?php echo($rate);?>"/><br/>
     <input type="hidden" name="projectId" value="<?php echo($projectId);?>"/>
     <input type="submit" value="Add Labor"/>
 </form>
 <hr/>
+
+<h3>Current Materials List</h3>
 
 <form method="post" action="calculateTotals.php">
     <input type="hidden" name="projectId" value="<?php echo($projectId);?>"/>

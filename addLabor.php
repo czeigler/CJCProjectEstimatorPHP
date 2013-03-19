@@ -4,9 +4,8 @@ require_once('headerFunctions.php');
 
 
 $projectId = $_POST["projectId"];
-$materialId = $_POST["materialId"];
-$materialCost = $_POST["cost"];
-$materialQuantity = $_POST["quantity"];
+$laborCost = $_POST["cost"];
+$laborHours = $_POST["quantity"];
 
 $errorMessages = '';
     
@@ -15,24 +14,20 @@ if(! empty($_POST)) {
         $errorMessages .= "<li>Project Id is a required field.</li>";
     }
 
-    if(empty($materialId)) {
-        $errorMessages .= "<li>Material is a required field.</li>";
+    if(empty($laborCost)) {
+        $errorMessages .= "<li>Labor Cost is a required field.</li>";
     }
 
-    if(empty($materialCost)) {
-        $errorMessages .= "<li>Material Cost is a required field.</li>";
+    if(empty($laborHours)) {
+        $errorMessages .= "<li>Labor Hours is a required field.</li>";
     }
 
-    if(empty($materialQuantity)) {
-        $errorMessages .= "<li>Material Quantity is a required field.</li>";
+    if(preg_match("/[^0-9\.]/", $laborHours) > 0) {
+        $errorMessages .= "<li>Labor Hours should only be digits and a decimal.</li>";
     }
 
-    if(preg_match("/[^0-9\.]/", $materialQuantity) > 0) {
-        $errorMessages .= "<li>Material Quantity should only be digits and a decimal.</li>";
-    }
-
-    if(preg_match("/[^0-9\.]/", $materialCost) > 0) {
-        $errorMessages .= "<li>Material Cost should only be digits and a decimal.</li>";
+    if(preg_match("/[^0-9\.]/", $laborCost) > 0) {
+        $errorMessages .= "<li>Labor Cost should only be digits and a decimal.</li>";
     }
     
 
@@ -40,7 +35,7 @@ if(! empty($_POST)) {
         // make sure that the user name is not already being used
         $conn = dbConnect();
 
-        $query = $conn->prepare('select projectId, materialId from projectMaterial where projectId = :projectId and materialId = :materialId');
+        $query = $conn->prepare('select projectId, materialId from projectLabor where projectId = :projectId and materialId = :materialId');
         $query->bindParam(':projectId', trim($projectId));
         $query->bindParam(':materialId', trim($materialId));
 
@@ -54,8 +49,8 @@ if(! empty($_POST)) {
             $query = $conn->prepare('insert into projectMaterial (projectId, materialId, number, cost) values (:projectId, :materialId, :materialQuantity, :cost)');
             $query->bindParam(':projectId', trim($projectId));
             $query->bindParam(':materialId', trim($materialId));
-            $query->bindParam(':materialQuantity', trim($materialQuantity));
-            $query->bindParam(':cost', trim($materialCost));
+            $query->bindParam(':materialQuantity', trim($laborHours));
+            $query->bindParam(':cost', trim($laborCost));
 
             $query->execute();
         }

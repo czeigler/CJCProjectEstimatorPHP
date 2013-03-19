@@ -3,6 +3,7 @@
 $publicPages = array(
     'index.php' => true,
     'login.php' => true,
+    'logout.php' => true,    
     'signup.php' => true,
     'about.php' => true);
 
