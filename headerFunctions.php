@@ -48,7 +48,9 @@ STR;
     return executeQuery($query);
 }        
         
-    
+function money_format($value) {
+    return "$ " . number_format($value, 2);
+}
     
     
 // check and see if we are on a public page

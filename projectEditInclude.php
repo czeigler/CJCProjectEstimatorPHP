@@ -9,7 +9,6 @@
 
 <h1><?php echo($projectName); ?></h1>
 
-
     <?php
     if(! empty($errorMessages)) {
         echo('<ul class="errorMessage">');
@@ -37,6 +36,46 @@
     <input type="hidden" name="id" value="<?php echo($projectId);?>"/>
     <input type="submit" value="Add Material"/>
 </form>
+<p />
+<h3>Current Materials List</h3>
+
+<form method="post" action="removeMaterial.php">
+<?php
+    $conn = dbConnect();
+
+    $stmt = $conn->prepare('select m.description, pm.cost, pm.number, mu.name from projectMaterial pm join material m on pm.materialId = m.materialId join materialUnit mu on m.materialUnitId = mu.materialUnitId where pm.projectId = :id');
+    $stmt->bindParam(':id', $projectId);
+    $stmt->execute();
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  //retreive the rows as an associative array
+
+    dbDisconnect($conn);
+
+//    var_dump($results);
+    
+    // materials display
+    echo "<table class='projectItems'>";
+    echo "<tr><th></th><th>Material</th><th>Unit Cost</th><th colspan='2'>Quantity</th><th>Cost</th></tr>";
+    foreach ($results as $projectMaterial)
+    {
+        echo "<tr>";
+        echo "<td><a>[Remove]</a></td>";
+        echo "<td>" . $projectMaterial['description'] . "</td>";
+        echo "<td class='numberColumn'>" . money_format(floatval($projectMaterial['cost'])) . "</td>";
+        echo "<td class='numberColumn'>" . $projectMaterial['number'] . "</td>";
+        echo "<td class='unitsColumn'>" . $projectMaterial['name'] . "</td>";
+        echo "<td class='numberColumn'>" . money_format(floatval($projectMaterial['cost'] * $projectMaterial['number'])) . "</td>";      
+
+        echo "</tr>";
+        $totalMaterials += floatval($projectMaterial['cost'] * $projectMaterial['number']);
+                
+    }
+    echo "</table>";
+?>
+    <input type="hidden" name="id" value="<?php echo($projectId);?>"/>
+</form>
+
+
+
 <hr/>
 
 <h3>Manage Labor</h3>
@@ -47,15 +86,50 @@
     <input type="hidden" name="id" value="<?php echo($projectId);?>"/>
     <input type="submit" value="Add Labor"/>
 </form>
+<p />
+<h3>Current Labor Line Items</h3>
+
+<form method="post" action="removeLabor.php">
+<?php
+    $conn = dbConnect();
+
+    $stmt = $conn->prepare('select * from projectLaborItem pl where pl.projectId = :id');
+    $stmt->bindParam(':id', $projectId);
+    $stmt->execute();
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  //retreive the rows as an associative array
+
+    dbDisconnect($conn);
+
+    //var_dump($results);
+    
+    // materials display
+    echo "<table class='projectItems'>";
+    echo "<tr><th></th><th>Description</th><th>Rate</th><th>Hours</th><th>Cost</th></tr>";
+    foreach ($results as $projectLaborItem)
+    {
+        echo "<tr>";
+        echo "<td><a>[Remove]</a></td>";
+        echo "<td>" . $projectLaborItem['Description'] . "</td>";
+        echo "<td class='numberColumn'>" . money_format(floatval($projectLaborItem['CostPerHour'])) . "</td>";
+        echo "<td class='numberColumn'>" . floatval($projectLaborItem['Hours']) . "</td>";
+        echo "<td class='numberColumn'>" . money_format(floatval($projectLaborItem['CostPerHour'] * $projectLaborItem['Hours'])) . "</td>";      
+
+        echo "</tr>";
+        $totalLabor += floatval($projectLaborItem['CostPerHour'] * $projectLaborItem['Hours']);
+    }
+    echo "</table>";
+?>
+    <input type="hidden" name="id" value="<?php echo($projectId);?>"/>
+</form>
 <hr/>
 
-<h3>Current Materials List</h3>
 
 
-
-<form method="post" action="calculateTotals.php">
-    <input type="hidden" name="id" value="<?php echo($projectId);?>"/>
-    <input type="submit" value="Calculate Project Totals"/>
-</form>
-
-</form>
+<table class="projectItems">
+<?php
+echo "<tr><td>Total Labor:</td><td class='numberColumn'>" . money_format($totalLabor) . "</td></tr>";
+echo "<tr><td>Total Materials:</td><td class='numberColumn'>" . money_format($totalMaterials) . "</td></tr>";
+$grandTotal = $totalLabor + $totalMaterials;
+echo "<tr><td>Grand Total:</td><td class='numberColumn'>" . money_format($grandTotal) . "</td></tr>";
+?>
+</table>

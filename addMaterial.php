@@ -3,7 +3,10 @@ require_once("dbConnExec.php");
 require_once('headerFunctions.php');
 
 
-$projectId = $_POST["projectId"];
+if (is_null($projectId) || empty($projectId)) {
+    $projectId = $_POST["id"];
+}
+
 $materialId = $_POST["materialId"];
 $materialCost = $_POST["cost"];
 $materialQuantity = $_POST["quantity"];
@@ -58,15 +61,22 @@ if(! empty($_POST)) {
             $query->bindParam(':cost', trim($materialCost));
 
             $query->execute();
+            
+            // clear variables because we saved and we want the form to be blank again
+            unset($materialId);
+            unset($materialCost);
+            unset($materialQuantity);
+            
         }
         dbDisconnect($conn);
 
+        
     }        
     
 
 }
 
-require_once('projectEditInclude.php');
+require_once("project.php");
 
 
 ?>

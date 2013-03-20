@@ -3,9 +3,13 @@ require_once("dbConnExec.php");
 require_once('headerFunctions.php');
 
 
-$projectId = $_POST["projectId"];
-$laborCost = $_POST["cost"];
-$laborHours = $_POST["quantity"];
+if (is_null($projectId) || empty($projectId)) {
+    $projectId = $_POST["id"];
+}
+
+$laborRate = $_POST["rate"];
+$laborHours = $_POST["hours"];
+$laborDescription = $_POST["laborDescription"];
 
 $errorMessages = '';
     
@@ -14,8 +18,8 @@ if(! empty($_POST)) {
         $errorMessages .= "<li>Project Id is a required field.</li>";
     }
 
-    if(empty($laborCost)) {
-        $errorMessages .= "<li>Labor Cost is a required field.</li>";
+    if(empty($laborRate)) {
+        $errorMessages .= "<li>Labor Rate is a required field.</li>";
     }
 
     if(empty($laborHours)) {
@@ -26,8 +30,8 @@ if(! empty($_POST)) {
         $errorMessages .= "<li>Labor Hours should only be digits and a decimal.</li>";
     }
 
-    if(preg_match("/[^0-9\.]/", $laborCost) > 0) {
-        $errorMessages .= "<li>Labor Cost should only be digits and a decimal.</li>";
+    if(preg_match("/[^0-9\.]/", $laborRate) > 0) {
+        $errorMessages .= "<li>Labor Rate should only be digits and a decimal.</li>";
     }
     
 
@@ -35,24 +39,29 @@ if(! empty($_POST)) {
         // make sure that the user name is not already being used
         $conn = dbConnect();
 
-        $query = $conn->prepare('select projectId, materialId from projectLabor where projectId = :projectId and materialId = :materialId');
+        $query = $conn->prepare('select projectId, description from projectLaborItem where projectId = :projectId and rtrim(description) = :description');
         $query->bindParam(':projectId', trim($projectId));
-        $query->bindParam(':materialId', trim($materialId));
+        $query->bindParam(':description', trim($laborDescription));
 
         $query->execute();
         $results = $query->fetchAll(PDO::FETCH_ASSOC);  //retreive the rows as an associative array
 
         if(count($results) > 0) {
-            $errorMessages .= "<li>That Material is already being used. Please choose another.</li>";
+            $errorMessages .= "<li>That labor description is already being used. Please enter another.</li>";
         } else {
         
-            $query = $conn->prepare('insert into projectMaterial (projectId, materialId, number, cost) values (:projectId, :materialId, :materialQuantity, :cost)');
-            $query->bindParam(':projectId', trim($projectId));
-            $query->bindParam(':materialId', trim($materialId));
-            $query->bindParam(':materialQuantity', trim($laborHours));
-            $query->bindParam(':cost', trim($laborCost));
+            $query = $conn->prepare('insert into projectLaborItem (projectId, description, hours, costperhour) values (:projectId, :description, :hours, :costPerHour)');
+            $query->bindParam(':projectId', $projectId);
+            $query->bindParam(':description', trim($laborDescription));
+            $query->bindParam(':hours', $laborHours);
+            $query->bindParam(':costPerHour', $laborRate);
 
             $query->execute();
+            
+            // clear variables because we saved and we want the form to be blank again
+            unset($laborRate);
+            unset($laborHours);
+            unset($laborDescription);
         }
         dbDisconnect($conn);
 
@@ -61,7 +70,7 @@ if(! empty($_POST)) {
 
 }
 
-require_once('projectEditInclude.php');
+require_once('project.php');
 
 
 ?>

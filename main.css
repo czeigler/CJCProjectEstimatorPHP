@@ -220,3 +220,7 @@ a:hover, a:active, a:focus {
   margin-right: 15px;
   padding: 2px;
 }
+
+.numberColumn {
+    text-align: right;
+}

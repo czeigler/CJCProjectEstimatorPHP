@@ -2,7 +2,9 @@
 
     require_once 'header.php';
     
-    $projectId = $_GET["id"];
+    if (is_null($projectId) || empty($projectId)) {
+        $projectId = $_GET["id"];
+    }
 
     $conn = dbConnect();
 
@@ -13,14 +15,12 @@
 
     foreach ($results as $project)
     {
-        extract($project);
-        $projectName = $Name;        
+        $projectName = $project['Name'];        
     }
 
     dbDisconnect($conn);
 
 
     require_once 'projectEditInclude.php';
-
     require_once 'footer.php'; 
 ?>

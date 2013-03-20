@@ -9,6 +9,7 @@ require_once('headerFunctions.php');
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>CJC Project Estimator - CIS 665 Colorado State University</title>
     <link href="main.css" rel="stylesheet" type="text/css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 
 <body>
