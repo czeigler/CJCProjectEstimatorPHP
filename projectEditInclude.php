@@ -39,11 +39,11 @@
 <p />
 <h3>Current Materials List</h3>
 
-<form method="post" action="removeMaterial.php">
+<form id="removeMaterial" method="post" action="removeMaterial.php">
 <?php
     $conn = dbConnect();
 
-    $stmt = $conn->prepare('select m.description, pm.cost, pm.number, mu.name from projectMaterial pm join material m on pm.materialId = m.materialId join materialUnit mu on m.materialUnitId = mu.materialUnitId where pm.projectId = :id');
+    $stmt = $conn->prepare('select pm.materialId, m.description, pm.cost, pm.number, mu.name from projectMaterial pm join material m on pm.materialId = m.materialId join materialUnit mu on m.materialUnitId = mu.materialUnitId where pm.projectId = :id');
     $stmt->bindParam(':id', $projectId);
     $stmt->execute();
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  //retreive the rows as an associative array
@@ -58,7 +58,7 @@
     foreach ($results as $projectMaterial)
     {
         echo "<tr>";
-        echo "<td><a>[Remove]</a></td>";
+        echo "<td><a class='removeMaterial'>[Remove]</a><input type='hidden' class='removeId' value='" . $projectMaterial['materialId'] . "'/></td>";
         echo "<td>" . $projectMaterial['description'] . "</td>";
         echo "<td class='numberColumn'>" . money_format(floatval($projectMaterial['cost'])) . "</td>";
         echo "<td class='numberColumn'>" . $projectMaterial['number'] . "</td>";
@@ -89,7 +89,7 @@
 <p />
 <h3>Current Labor Line Items</h3>
 
-<form method="post" action="removeLabor.php">
+<form id="removeLabor" method="post" action="removeLabor.php">
 <?php
     $conn = dbConnect();
 
@@ -108,7 +108,7 @@
     foreach ($results as $projectLaborItem)
     {
         echo "<tr>";
-        echo "<td><a>[Remove]</a></td>";
+        echo "<td><a class='removeLabor'>[Remove]</a><input type='hidden' class='removeId' value='" . $projectLaborItem['ProjectLaborItemId'] . "'/></td>";
         echo "<td>" . $projectLaborItem['Description'] . "</td>";
         echo "<td class='numberColumn'>" . money_format(floatval($projectLaborItem['CostPerHour'])) . "</td>";
         echo "<td class='numberColumn'>" . floatval($projectLaborItem['Hours']) . "</td>";
@@ -133,3 +133,20 @@ $grandTotal = $totalLabor + $totalMaterials;
 echo "<tr><td>Grand Total:</td><td class='numberColumn'>" . money_format($grandTotal) . "</td></tr>";
 ?>
 </table>
+
+<script>
+    $(document).ready(function() {
+        $('.removeLabor').click(function() {
+            if (confirm("Are you sure you want to delete this Labor Item?")) {
+                
+            }
+        });
+    
+    $('.removeMaterial').click(function() {
+            if (confirm("Are you sure you want to delete this Material?")) {
+                
+            }
+
+        });
+    });
+</script>
