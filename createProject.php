@@ -29,16 +29,14 @@ $errorMessages = '';
                 $query->bindParam(':userId', trim($userId));
          
                 $query->execute();
+                $projectId = $conn->lastInsertId();
             }
             
             dbDisconnect($conn);
             echo($errorMessages);
         }        
     }
-?>
-
-
-<?php
+    
 require_once 'projectEditInclude.php';
 
 require_once 'footer.php'; 
