@@ -1,7 +1,7 @@
 <?php
 require_once 'header.php'; 
 
-$projects = getProjectsForUser(getCurrentUserId());
+$projects = getProjectsForUser(getCurrentUserId(), $_POST['projectName']);
 $output .= "<table class='results'><tr><th>Project Name</th></tr><tbody>";   
 foreach ($projects as $project)
     {

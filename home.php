@@ -32,7 +32,7 @@ require_once 'header.php';
     <hr>
     <form name="form2" method="post" action="searchResults.php" value="clickable button"> 
        <p>Search Term:
-         <input name="Project Name" type="text" id="Project Name" size="17">
+         <input name="projectName" type="text" id="projectName" size="17">
        </p>
        <p>
          <input type="submit" class="input" name="Search" id="Search" value="Go">

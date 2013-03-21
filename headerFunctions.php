@@ -37,12 +37,14 @@ $publicPages = array(
         }
     }
     
-function getProjectsForUser($userId)
+function getProjectsForUser($userId, $searchString)
 {
+    $searchString = "%" . $searchString . "%";
     $query = <<<STR
 Select name, projectId
 From project
-Where id like '%$userId%'
+Where id = $userId
+and name like '$searchString'
 STR;
 
     return executeQuery($query);
