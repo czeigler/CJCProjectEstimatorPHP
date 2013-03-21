@@ -14,7 +14,7 @@ require_once 'header.php';
     <form name="form2" method="post" action="reports.html" value="clickable button"> 
   
        <p>
-         <input type="submit" name="Search" id="Search" value="Run Report">
+         <input type="submit" class="input" name="Search" id="Search" value="Run Report">
        </p>
     </form>
   </div>
@@ -26,7 +26,7 @@ require_once 'header.php';
          <input name="Project Name" type="text" id="Project Name" size="17">
        </p>
        <p>
-         <input type="submit" name="Search" id="Search" value="Go">
+         <input type="submit" class="input" name="Search" id="Search" value="Go">
        </p>
     </form>
   </div>
@@ -42,11 +42,11 @@ require_once 'header.php';
          <input name="projectName" type="text" id="Project Name" size="17">
        </p>
        <p>
-         <input type="submit" name="Add" id="Add" value="Add">
+         <input type="submit" class="input" name="Add" id="Add" value="Add">
        </p>
      </form>
 
-</div><div class="content"><p>Results will be displayed on the next page.</p></div>
+</div><div class="contentClear"><p>Results will be displayed on the next page.</p></div>
   </div>
 
 
