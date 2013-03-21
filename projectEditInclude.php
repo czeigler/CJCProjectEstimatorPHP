@@ -62,6 +62,7 @@
     echo "</table>";
 ?>
     <input type="hidden" name="id" value="<?php echo($projectId);?>"/>
+    <input type="hidden" id="projectLaborItemId" name="projectLaborItemId" value=""/>
 </form>
 </div>
     
@@ -123,6 +124,7 @@
     echo "</table>";
 ?>
     <input type="hidden" name="id" value="<?php echo($projectId);?>"/>
+    <input type="hidden" id="materialId" name="materialId" value=""/>
 </form>
 </div>
 <div class="dashboardCosts">
@@ -143,14 +145,16 @@ echo "<tr><td>Grand Total:</td><td class='numberColumn'>" . money_format($grandT
 <script>
     $(document).ready(function() {
         $('.removeLabor').click(function() {
-            if (confirm("Are you sure you want to delete this Labor Item?")) {
-                
+            if(confirm("Are you sure you want to delete this Labor Item?")) {
+                $('#projectLaborItemId').val($(this).next('.removeId').val());
+                $('#removeLabor').submit();
             }
         });
     
     $('.removeMaterial').click(function() {
             if (confirm("Are you sure you want to delete this Material?")) {
-                
+                $('#materialId').val($(this).next('.removeId').val());
+                $('#removeMaterial').submit();
             }
 
         });

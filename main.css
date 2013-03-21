@@ -273,7 +273,8 @@ a:hover, a:active, a:focus {
     text-align: right;
 }
 
-.projectItems{
+table.projectItems, table.projectItems tr td{
     text-decoration: captiontext;
-  
+    font-size: 9pt !important;
+    border: 1px #dcdcdc solid;
 }

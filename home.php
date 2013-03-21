@@ -2,10 +2,19 @@
 require_once 'header.php'; 
 ?>
 
+    <?php
+    if(! empty($errorMessages)) {
+        echo('<br />');
+        echo('<ul class="errorMessage">');
+        echo($errorMessages); 
+        echo('</ul><br/>');
+    }
+    ?>    
 
 
   <div class="content">
     <h3><br>Projects Dashboard</h3>
+
     
    <p>Welcome to your projects home page. From here you can create a new project, search for an existing project, or run the projects report. </p>
     <div class="dashboard">
@@ -37,12 +46,12 @@ require_once 'header.php';
   
      <form name="form1" method="post" action="createProject.php" value="clickable button"> 
        <p>
-         <label for="Project Name">Project Name</label>
+         <label for="projectId">Project Name</label>
          :
-         <input name="projectName" type="text" id="Project Name" size="17">
+         <input name="projectName" type="text" id="projectName" size="17">
        </p>
        <p>
-         <input type="submit" class="input" name="Add" id="Add" value="Add">
+         <input type="submit" class="input" name="Add" id="Add" value="Add" id="addProject">
        </p>
      </form>
 
@@ -53,3 +62,14 @@ require_once 'header.php';
 <?php
 require_once 'footer.php'; 
 ?>
+
+<!--<script>
+    $('input[type=submit]').click(function() {
+       if($('#projectName').val().length < 1)  {
+           alert("Project Name cannot be blank.");
+           return false;
+       } else {
+           return true;
+       }
+    });
+</script>-->

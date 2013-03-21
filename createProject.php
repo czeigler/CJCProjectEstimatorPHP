@@ -1,6 +1,7 @@
 <?php
 
-require_once 'header.php';
+require_once 'headerFunctions.php';
+require_once 'dbConnExec.php';
 
 $projectName = $_POST["projectName"];
 $errorMessages = '';
@@ -33,11 +34,19 @@ $errorMessages = '';
             }
             
             dbDisconnect($conn);
-            echo($errorMessages);
+
         }        
     }
     
-require_once 'projectEditInclude.php';
+if(!empty($errorMessages)) {
+
+    require_once 'home.php';
+}
+else {
+    require_once 'header.php';
+    require_once 'projectEditInclude.php';
+}    
+
 
 require_once 'footer.php'; 
 ?>
