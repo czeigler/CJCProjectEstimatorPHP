@@ -16,8 +16,59 @@
         echo('</ul><br/>');
     }
     ?>
+<div class="content"><h4>Estimate Management Dashboard</h4>
+    
+   
+    <div class="dashboard2">
+<div class="legend">Manage Labor</div>
+<form method="post" action="addLabor.php">
+    Description: <input type="text" name="laborDescription" value="<?php echo($laborDescription);?>"/><br/>
+    Labor Hours: <input type="text" name="hours" value="<?php echo($laborHours);?>"/><br/>
+    Labor Rate: <input type="text" name="rate" value="<?php echo($laborRate);?>"/><br/>
+    <input type="hidden" name="id" value="<?php echo($projectId);?>"/>
+    <input type="submit" class="input" value="Add Labor"/>
+</form>
+<p />
+<h5>Current Labor Line Items</h5>
 
-<h3>Manage Materials</h3>
+<form id="removeLabor" method="post" action="removeLabor.php">
+<?php
+    $conn = dbConnect();
+
+    $stmt = $conn->prepare('select * from projectLaborItem pl where pl.projectId = :id');
+    $stmt->bindParam(':id', $projectId);
+    $stmt->execute();
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  //retreive the rows as an associative array
+
+    dbDisconnect($conn);
+
+    //var_dump($results);
+    
+    // materials display
+    echo "<table class='projectItems'>";
+    echo "<tr><th></th><th>Description</th><th>Rate</th><th>Hours</th><th>Cost</th></tr>";
+    foreach ($results as $projectLaborItem)
+    {
+        echo "<tr>";
+        echo "<td><a class='removeLabor'>[Remove]</a><input type='hidden' class='removeId' value='" . $projectLaborItem['ProjectLaborItemId'] . "'/></td>";
+        echo "<td>" . $projectLaborItem['Description'] . "</td>";
+        echo "<td class='numberColumn'>" . money_format(floatval($projectLaborItem['CostPerHour'])) . "</td>";
+        echo "<td class='numberColumn'>" . floatval($projectLaborItem['Hours']) . "</td>";
+        echo "<td class='numberColumn'>" . money_format(floatval($projectLaborItem['CostPerHour'] * $projectLaborItem['Hours'])) . "</td>";      
+
+        echo "</tr>";
+        $totalLabor += floatval($projectLaborItem['CostPerHour'] * $projectLaborItem['Hours']);
+    }
+    echo "</table>";
+?>
+    <input type="hidden" name="id" value="<?php echo($projectId);?>"/>
+</form>
+</div>
+    
+    
+    
+    <div class="dashboard2">
+<div class="legend">Manage Materials</div>
 <form method="post" action="addMaterial.php">
     Material: 
     <select name="materialId">
@@ -34,10 +85,10 @@
     Material Cost: <input type="text" name="cost" value="<?php echo($materialCost);?>"/><br/>
     Material Quantity: <input type="text" name="quantity" value="<?php echo($materialQuantity);?>"/><br/>
     <input type="hidden" name="id" value="<?php echo($projectId);?>"/>
-    <input type="submit" value="Add Material"/>
+    <input type="submit" class="input" value="Add Material"/>
 </form>
 <p />
-<h3>Current Materials List</h3>
+<h5>Current Materials List</h5>
 
 <form id="removeMaterial" method="post" action="removeMaterial.php">
 <?php
@@ -73,57 +124,9 @@
 ?>
     <input type="hidden" name="id" value="<?php echo($projectId);?>"/>
 </form>
-
-
-
-<hr/>
-
-<h3>Manage Labor</h3>
-<form method="post" action="addLabor.php">
-    Description: <input type="text" name="laborDescription" value="<?php echo($laborDescription);?>"/><br/>
-    Labor Hours: <input type="text" name="hours" value="<?php echo($laborHours);?>"/><br/>
-    Labor Rate: <input type="text" name="rate" value="<?php echo($laborRate);?>"/><br/>
-    <input type="hidden" name="id" value="<?php echo($projectId);?>"/>
-    <input type="submit" value="Add Labor"/>
-</form>
-<p />
-<h3>Current Labor Line Items</h3>
-
-<form id="removeLabor" method="post" action="removeLabor.php">
-<?php
-    $conn = dbConnect();
-
-    $stmt = $conn->prepare('select * from projectLaborItem pl where pl.projectId = :id');
-    $stmt->bindParam(':id', $projectId);
-    $stmt->execute();
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  //retreive the rows as an associative array
-
-    dbDisconnect($conn);
-
-    //var_dump($results);
-    
-    // materials display
-    echo "<table class='projectItems'>";
-    echo "<tr><th></th><th>Description</th><th>Rate</th><th>Hours</th><th>Cost</th></tr>";
-    foreach ($results as $projectLaborItem)
-    {
-        echo "<tr>";
-        echo "<td><a class='removeLabor'>[Remove]</a><input type='hidden' class='removeId' value='" . $projectLaborItem['ProjectLaborItemId'] . "'/></td>";
-        echo "<td>" . $projectLaborItem['Description'] . "</td>";
-        echo "<td class='numberColumn'>" . money_format(floatval($projectLaborItem['CostPerHour'])) . "</td>";
-        echo "<td class='numberColumn'>" . floatval($projectLaborItem['Hours']) . "</td>";
-        echo "<td class='numberColumn'>" . money_format(floatval($projectLaborItem['CostPerHour'] * $projectLaborItem['Hours'])) . "</td>";      
-
-        echo "</tr>";
-        $totalLabor += floatval($projectLaborItem['CostPerHour'] * $projectLaborItem['Hours']);
-    }
-    echo "</table>";
-?>
-    <input type="hidden" name="id" value="<?php echo($projectId);?>"/>
-</form>
-<hr/>
-
-
+</div>
+<div class="dashboardCosts">
+<div class="legend">Project Totals</div>
 
 <table class="projectItems">
 <?php
@@ -133,7 +136,10 @@ $grandTotal = $totalLabor + $totalMaterials;
 echo "<tr><td>Grand Total:</td><td class='numberColumn'>" . money_format($grandTotal) . "</td></tr>";
 ?>
 </table>
+</div>
 
+    <p class="contentClear">Return to the <a href="home.php">Projects Page</a></P>
+</div>
 <script>
     $(document).ready(function() {
         $('.removeLabor').click(function() {
