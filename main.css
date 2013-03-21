@@ -58,8 +58,8 @@ a:hover, a:active, a:focus {
 	max-width: 1260px;
 	min-width: 780px;
 	background: #FFF;
-	margin: 0 auto; 
-}
+	margin: 0 auto;
+        }
 .containernav {
 	width: 100%;
 	max-width: 1260px;
@@ -141,6 +141,19 @@ a:hover, a:active, a:focus {
 
 .content {
 	padding: 10px 0;
+        height: 100%;
+}
+.contentClear {
+        height: 100%;
+        pading: 2px;
+        clear: both;
+}
+
+.contentClear a:link,.content a:visited{
+	color: blue;
+	display: inline;
+	text-decoration: none;
+        margin: 1px;
 }
 
 .results {
@@ -191,7 +204,7 @@ a:hover, a:active, a:focus {
 }
 
 .fieldset {
-    width: 350px;
+    width: 400px;
     margin: 25px; 
     border: 1px solid #dcdcdc;
     border-radius: 10px;
@@ -203,16 +216,19 @@ a:hover, a:active, a:focus {
     border: 1px solid #dcdcdc;
     border-radius: 10px;
     padding: 10px 20px;
+    margin: 2px;
     text-align: left;
     text-transform: uppercase;}
 
 .input[type=submit] {
     color: #444444;
-    font-size: 20px;
+    font-size: 18px;
     border-radius: 5px;
     padding-bottom: 3px;
     border: 1px solid #b2b2b2;
-    margin: 25px;
+    margin-left: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 .image
 { float: right;
@@ -225,7 +241,7 @@ a:hover, a:active, a:focus {
     text-align: right;
 }
 .dashboard {
-    width: 25%;
+    width: 24%;
     float: right;
     margin: 6px;
     margin-right:25px;
@@ -233,4 +249,31 @@ a:hover, a:active, a:focus {
     border-radius: 10px;
     padding: 20px;
     text-align: right;
+}
+
+.dashboard2 {
+    width:40%;
+    float: right;
+    margin: 14px;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: right;
+}
+
+.dashboardCosts {
+    width: 200px;
+    float: right;
+    clear: both;
+    margin: 6px;
+    margin-right:25px;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: right;
+}
+
+.projectItems{
+    text-decoration: captiontext;
+  
 }
