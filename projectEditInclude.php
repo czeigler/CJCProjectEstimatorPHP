@@ -10,6 +10,8 @@
 <h1><?php echo($projectName); ?></h1>
 
     <?php
+$hasMaterials = false;
+$hasLabor = false;
     if(! empty($errorMessages)) {
         echo('<ul class="errorMessage">');
         echo($errorMessages); 
@@ -49,6 +51,7 @@
     echo "<tr><th></th><th>Description</th><th>Rate</th><th>Hours</th><th>Cost</th></tr>";
     foreach ($results as $projectLaborItem)
     {
+        $hasLabor = true;
         echo "<tr>";
         echo "<td><a class='removeLabor'>[Remove]</a><input type='hidden' class='removeId' value='" . $projectLaborItem['ProjectLaborItemId'] . "'/></td>";
         echo "<td>" . $projectLaborItem['Description'] . "</td>";
@@ -109,6 +112,7 @@
     echo "<tr><th></th><th>Material</th><th>Cost</th><th colspan='2'>Qty</th><th>Cost</th></tr>";
     foreach ($results as $projectMaterial)
     {
+        $hasMaterials = true;
         echo "<tr>";
         echo "<td><a class='removeMaterial'>[Remove]</a><input type='hidden' class='removeId' value='" . $projectMaterial['materialId'] . "'/></td>";
         echo "<td>" . $projectMaterial['description'] . "</td>";
@@ -140,8 +144,21 @@ echo "<tr><td>Grand Total:</td><td class='numberColumn'>" . money_format($grandT
 </table>
 </div></div>
 
+    
+    
+    
+    
     <p class="contentClear">Return to the <a href="home.php">Projects Page</a></P>
 </div>
+
+    <?php
+    if(! $hasMaterials || ! $hasLabor) {
+        echo('<ul class="errorMessage">');
+        echo("You must have at least on labor item and one material for your project to be complete."); 
+        echo('</ul><br/>');
+    }
+    ?>
+
 <script>
     $(document).ready(function() {
         $('.removeLabor').click(function() {
