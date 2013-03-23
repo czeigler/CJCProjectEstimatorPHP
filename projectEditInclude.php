@@ -29,7 +29,7 @@
     <input type="submit" class="input" value="Add Labor"/>
 </form>
 <p />
-<h5>Current Labor Line Items</h5>
+<div class="dashboardTable">Current Labor Line Items
 
 <form id="removeLabor" method="post" action="removeLabor.php">
 <?php
@@ -44,7 +44,7 @@
 
     //var_dump($results);
     
-    // materials display
+    // materials display  
     echo "<table class='projectItems'>";
     echo "<tr><th></th><th>Description</th><th>Rate</th><th>Hours</th><th>Cost</th></tr>";
     foreach ($results as $projectLaborItem)
@@ -60,7 +60,7 @@
         $totalLabor += floatval($projectLaborItem['CostPerHour'] * $projectLaborItem['Hours']);
     }
     echo "</table>";
-?>
+?></div>
     <input type="hidden" name="id" value="<?php echo($projectId);?>"/>
     <input type="hidden" id="projectLaborItemId" name="projectLaborItemId" value=""/>
 </form>
@@ -89,7 +89,7 @@
     <input type="submit" class="input" value="Add Material"/>
 </form>
 <p />
-<h5>Current Materials List</h5>
+<div class="dashboardTable">Current Materials List
 
 <form id="removeMaterial" method="post" action="removeMaterial.php">
 <?php
@@ -106,14 +106,14 @@
     
     // materials display
     echo "<table class='projectItems'>";
-    echo "<tr><th></th><th>Material</th><th>Unit Cost</th><th colspan='2'>Quantity</th><th>Cost</th></tr>";
+    echo "<tr><th></th><th>Material</th><th>Cost</th><th colspan='2'>Qty</th><th>Cost</th></tr>";
     foreach ($results as $projectMaterial)
     {
         echo "<tr>";
         echo "<td><a class='removeMaterial'>[Remove]</a><input type='hidden' class='removeId' value='" . $projectMaterial['materialId'] . "'/></td>";
         echo "<td>" . $projectMaterial['description'] . "</td>";
         echo "<td class='numberColumn'>" . money_format(floatval($projectMaterial['cost'])) . "</td>";
-        echo "<td class='numberColumn'>" . $projectMaterial['number'] . "</td>";
+        echo "<td class='numberColumn'>" . number_format($projectMaterial['number'], $decimals) . "</td>";
         echo "<td class='unitsColumn'>" . $projectMaterial['name'] . "</td>";
         echo "<td class='numberColumn'>" . money_format(floatval($projectMaterial['cost'] * $projectMaterial['number'])) . "</td>";      
 
@@ -122,7 +122,7 @@
                 
     }
     echo "</table>";
-?>
+?></div>
     <input type="hidden" name="id" value="<?php echo($projectId);?>"/>
     <input type="hidden" id="materialId" name="materialId" value=""/>
 </form>
@@ -130,7 +130,7 @@
 <div class="dashboardCosts">
 <div class="legend">Project Totals</div>
 
-<table class="projectItems">
+<div class="dashboardTable"><table class="projectItems">
 <?php
 echo "<tr><td>Total Labor:</td><td class='numberColumn'>" . money_format($totalLabor) . "</td></tr>";
 echo "<tr><td>Total Materials:</td><td class='numberColumn'>" . money_format($totalMaterials) . "</td></tr>";
@@ -138,7 +138,7 @@ $grandTotal = $totalLabor + $totalMaterials;
 echo "<tr><td>Grand Total:</td><td class='numberColumn'>" . money_format($grandTotal) . "</td></tr>";
 ?>
 </table>
-</div>
+</div></div>
 
     <p class="contentClear">Return to the <a href="home.php">Projects Page</a></P>
 </div>
