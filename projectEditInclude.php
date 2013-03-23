@@ -22,9 +22,9 @@
     <div class="dashboard2">
 <div class="legend">Manage Labor</div>
 <form method="post" action="addLabor.php">
-    Description: <input type="text" name="laborDescription" value="<?php echo($laborDescription);?>"/><br/>
-    Labor Hours: <input type="text" name="hours" value="<?php echo($laborHours);?>"/><br/>
-    Labor Rate: <input type="text" name="rate" value="<?php echo($laborRate);?>"/><br/>
+    Description: <input type="text" name="laborDescription" maxlength="20" value="<?php echo($laborDescription);?>"/><br/>
+    Labor Hours: <input type="text" name="hours" maxlength="4" value="<?php echo($laborHours);?>"/><br/>
+    Labor Rate: <input type="text" name="rate" maxlength="4" value="<?php echo($laborRate);?>"/><br/>
     <input type="hidden" name="id" value="<?php echo($projectId);?>"/>
     <input type="submit" class="input" value="Add Labor"/>
 </form>
