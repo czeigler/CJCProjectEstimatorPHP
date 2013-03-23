@@ -239,7 +239,7 @@ a:hover, a:active, a:focus {
 
 .numberColumn {
     text-align: right;
-}
+    }
 .dashboard {
     width: 24%;
     float: right;
@@ -252,17 +252,17 @@ a:hover, a:active, a:focus {
 }
 
 .dashboard2 {
-    width:40%;
+    width:42%;
     float: right;
-    margin: 14px;
+    margin: 11px;
     border: 1px solid #dcdcdc;
     border-radius: 10px;
     padding: 20px;
     text-align: right;
-}
+  }
 
 .dashboardCosts {
-    width: 200px;
+    width: 300px;
     float: right;
     clear: both;
     margin: 6px;
@@ -273,8 +273,22 @@ a:hover, a:active, a:focus {
     text-align: right;
 }
 
+.dashboardTable {
+    width: 90%;
+    background-color: #dcdcdc;
+    color: darkgreen;
+    margin-right:50px;
+    border: 1px solid #dcdcdc;
+    padding: 15px;
+    text-align: left; 
+     border-radius: 10px;
+}
 table.projectItems, table.projectItems tr td{
     text-decoration: captiontext;
+    background-color: #FFF;
+    border-collapse: collapse;
+    padding: 2px;
+    text-align: right;
     font-size: 9pt !important;
-    border: 1px #dcdcdc solid;
+    border: 1px darkgreen solid;
 }
