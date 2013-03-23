@@ -20,7 +20,7 @@ require_once 'header.php';
     <div class="dashboard">
     <h4 class="legend">Run Projects Report</h4>
     <hr>
-    <form name="form2" method="post" action="reports.html" value="clickable button"> 
+    <form name="form2" method="post" action="report.php" value="clickable button"> 
   
        <p>
          <input type="submit" class="input" name="Search" id="Search" value="Run Report">
@@ -63,13 +63,3 @@ require_once 'header.php';
 require_once 'footer.php'; 
 ?>
 
-<!--<script>
-    $('input[type=submit]').click(function() {
-       if($('#projectName').val().length < 1)  {
-           alert("Project Name cannot be blank.");
-           return false;
-       } else {
-           return true;
-       }
-    });
-</script>-->

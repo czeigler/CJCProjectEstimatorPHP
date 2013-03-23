@@ -45,6 +45,7 @@ Select name, projectId
 From project
 Where id = $userId
 and name like '$searchString'
+order by lower(name)
 STR;
 
     return executeQuery($query);

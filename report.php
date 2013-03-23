@@ -1,0 +1,79 @@
+<?php
+require_once 'header.php'; 
+
+$userId = getCurrentUserId();
+
+    $query = <<<STR
+select name
+    , p.projectId
+    , pl.laborCost
+    , pm.materialCost
+    , pm.numMaterials
+    , pl.numTasks
+from project p
+ left join (select projectId, count(projectLaborItemId) numTasks, sum(CostPerHour * Hours) as laborCost from projectLaborItem group by projectId) pl on p.projectId = pl.projectId
+ left join (select projectId, count(materialId) numMaterials, sum(cost * number) as materialCost from projectMaterial group by projectId) pm on p.projectId = pm.projectId
+where p.id = $userId
+order by lower(p.name)
+STR;
+
+    $projects = executeQuery($query);
+?>
+
+<h2>User Projects Report</h2>
+
+<table class='report'>
+    <thead>
+    <tr>
+        <th>Project Name</th>
+        <th>Num. Materials</th>
+        <th>Material Cost</th>        
+        <th>Num. Tasks</th>
+        <th>Labor Cost</th>
+        <th>Total Cost</th>
+    </tr>
+    <thead>
+    <tbody>
+
+<?php
+foreach ($projects as $project)
+    {
+        extract($project);
+    $totalCostOfProjects += $materialCost + $laborCost;
+    $projectCost = money_format($materialCost + $laborCost);
+    $laborCost = money_format($laborCost);
+    $materialCost = money_format($materialCost);   
+     
+        $output .= <<<ABC
+        <tr>
+            <td>$name</td>
+            <td class="numberColumn">$numMaterials</td>
+            <td class="numberColumn">$materialCost</td>
+            <td class="numberColumn">$numTasks</td>
+            <td class="numberColumn">$laborCost</td>
+            <td class="numberColumn">$projectCost</td>
+        </tr>
+
+ABC;
+    }
+
+    echo($output);
+?>
+    <tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="border-top: solid 1px red !important;">Total:</td>
+            <td  style="border-top: solid 1px red !important;"><?php echo money_format($totalCostOfProjects) ?></td>
+        </tr>
+    </tfoot>
+</table>
+
+<p class="contentClear">Return to the <a href="home.php">Projects Page</a></p>
+
+<?php
+require_once 'footer.php'; 
+?>
