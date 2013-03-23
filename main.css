@@ -36,23 +36,6 @@ a:hover, a:active, a:focus {
 	color: #FC3
 }
 
-.results a:link {
-	color: black;
-	display: inline;
-	text-decoration: none;
-	margin: 35px
-}
-.results a:visited {
-	color: black  ;
-	text-decoration: none;
-
-}
-.results a:hover, .results a:active, .results a:focus { 
-	text-decoration: none;
-	color: black;
-}
-
-
 .container {
 	width: 80%;
 	max-width: 1260px;
@@ -156,11 +139,7 @@ a:hover, a:active, a:focus {
         margin: 1px;
 }
 
-.results {
-	padding: 10px 0;
-	border: thin solid #999;
-	/*background-color:#FFFF66;*/
-}
+
 .content ul, .content ol { 
 	padding: 0 15px 15px 40px; 
 }
@@ -291,4 +270,20 @@ table.projectItems, table.projectItems tr td{
     text-align: right;
     font-size: 9pt !important;
     border: 1px darkgreen solid;
+}
+
+.results {
+	padding: 10px 0;
+	/*border: thin solid #999;
+	background-color:#FFFF66;*/
+        color: black;
+}
+.results a:link, .results a:visited {
+    color: blue; 
+    text-decoration: underline;
+}
+
+.results a:hover,  .results a:active, .results a:focus { 
+	text-decoration: none;
+	color: blue;
 }
