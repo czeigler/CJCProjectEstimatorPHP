@@ -70,6 +70,14 @@ ABC;
             <td style="border-top: solid 2px black !important;">Total:</td>
             <td  style="border-top: solid 2px black !important;"><?php echo money_format($totalCostOfProjects) ?></td>
         </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Num. Projects:</td>
+            <td><?php echo $numberOfProjects ?></td>
+        </tr>        
 <?php if($numberOfProjects != 0) {?>
         <tr>
             <td></td>
