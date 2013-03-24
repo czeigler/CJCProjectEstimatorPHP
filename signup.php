@@ -59,6 +59,12 @@
                 $query->bindParam(':passwordSalt', trim($passwordSalt));
                 
                 $query->execute();
+                
+                setcookie('auth', $passwordHash, time()+3600);
+                redirect('thankyou.php');
+                
+                
+                
             }
             
 
