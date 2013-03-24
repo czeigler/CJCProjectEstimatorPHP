@@ -20,15 +20,15 @@ STR;
     $projects = executeQuery($query);
 ?>
 
-<h2>User Projects Report</h2>
+<h4><br>User Projects Report</h4>
 
 <table class='report'>
     <thead>
     <tr>
         <th>Project Name</th>
-        <th>Num. Materials</th>
+        <th>Qty. Materials</th>
         <th>Material Cost</th>        
-        <th>Num. Tasks</th>
+        <th>Qty. Tasks</th>
         <th>Labor Cost</th>
         <th>Total Cost</th>
     </tr>
@@ -66,8 +66,8 @@ ABC;
             <td></td>
             <td></td>
             <td></td>
-            <td style="border-top: solid 1px red !important;">Total:</td>
-            <td  style="border-top: solid 1px red !important;"><?php echo money_format($totalCostOfProjects) ?></td>
+            <td style="border-top: solid 2px black !important;">Total:</td>
+            <td  style="border-top: solid 2px black !important;"><?php echo money_format($totalCostOfProjects) ?></td>
         </tr>
     </tfoot>
 </table>
