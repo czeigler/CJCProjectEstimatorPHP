@@ -287,3 +287,28 @@ table.projectItems, table.projectItems tr td{
 	text-decoration: none;
 	color: blue;
 }
+
+table.report{
+    width: 95%;
+    margin: 25px;
+    text-align: right;
+    padding: 10px;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    font-size: 12px;
+}
+table.report td {
+    padding: 2px;
+    border: 1px solid #dcdcdc;
+    border-collapse: collapse !important;
+    text-align: right;
+    border-spacing: 1px !important;
+}
+
+table.report th {
+   padding: 5px;
+    border: none;
+    border-collapse: collapse;
+    text-align: right;  
+    font-size: 15px !important;
+}
