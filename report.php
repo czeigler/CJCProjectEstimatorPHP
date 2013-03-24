@@ -26,7 +26,7 @@ STR;
     <thead>
     <tr>
         <th>Project Name</th>
-        <th>Qty. Materials</th>
+        <th>Material Types</th>
         <th>Material Cost</th>        
         <th>Qty. Tasks</th>
         <th>Labor Cost</th>
