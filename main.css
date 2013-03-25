@@ -128,12 +128,12 @@ a:hover, a:active, a:focus {
 }
 .contentClear {
         height: 100%;
-        pading: 2px;
+        padding: 2px;
         clear: both;
 }
 
-.contentClear a:link,.content a:visited{
-	color: blue;
+.contentClear a:link,.content a:visited {
+	color: blue !important;
 	display: inline;
 	text-decoration: none;
         margin: 1px;

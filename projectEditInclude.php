@@ -86,8 +86,8 @@ $hasLabor = false;
         }?>
     </select><br/>
     
-    Material Cost: <input type="text" name="cost" value="<?php echo($materialCost);?>"/><br/>
-    Material Quantity: <input type="text" name="quantity" value="<?php echo($materialQuantity);?>"/><br/>
+    Material Cost: <input type="text" name="cost"  maxlength="4" value="<?php echo($materialCost);?>"/><br/>
+    Material Quantity: <input type="text" name="quantity"  maxlength="4" value="<?php echo($materialQuantity);?>"/><br/>
     <input type="hidden" name="id" value="<?php echo($projectId);?>"/>
     <input type="submit" class="input" value="Add Material"/>
 </form>

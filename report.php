@@ -93,7 +93,7 @@ ABC;
     
 </table>
 
-<p class="contentClear">Return to the <a href="home.php">Projects Page</a></p>
+<div class="contentClear"><p>Return to the <a href="home.php">Projects Page</a></p></div>
 
 <?php
 require_once 'footer.php'; 

@@ -17,7 +17,9 @@ require_once 'header.php';
 
     
    <p>Welcome to your projects home page. From here you can create a new project, search for an existing project, or run the projects report. </p>
-    <div class="dashboard">
+   <div class="contentClear"><p>To view all your projects <a href="searchResults.php">click here</a>.</p></div>
+   
+   <div class="dashboard">
     <h4 class="legend">Run Projects Report</h4>
     <hr>
     <form name="form2" method="post" action="report.php" value="clickable button"> 
