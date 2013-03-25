@@ -36,6 +36,7 @@ STR;
     <tbody>
 
 <?php
+$numberOfProjects = 0;
 foreach ($projects as $project)
     {
         extract($project);
@@ -43,7 +44,7 @@ foreach ($projects as $project)
     $projectCost = money_format($materialCost + $laborCost);
     $laborCost = money_format($laborCost);
     $materialCost = money_format($materialCost);   
-     
+    $numberOfProjects++;
         $output .= <<<ABC
         <tr>
             <td>$name</td>
@@ -69,7 +70,27 @@ ABC;
             <td style="border-top: solid 2px black !important;">Total:</td>
             <td  style="border-top: solid 2px black !important;"><?php echo money_format($totalCostOfProjects) ?></td>
         </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Num. Projects:</td>
+            <td><?php echo $numberOfProjects ?></td>
+        </tr>        
+<?php if($numberOfProjects != 0) {?>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Avg. Project Cost:</td>
+            <td><?php echo money_format($totalCostOfProjects/$numberOfProjects) ?></td>
+        </tr>
+<?php } ?>
+        
     </tfoot>
+    
 </table>
 
 <p class="contentClear">Return to the <a href="home.php">Projects Page</a></p>
